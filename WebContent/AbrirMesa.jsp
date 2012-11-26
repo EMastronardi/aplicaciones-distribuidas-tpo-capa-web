@@ -29,9 +29,9 @@
 	</ul>
 	<!-- Fin Menu -->
 	<%
-		List<SucursalEntity> lista = AdministradorSucursales.getInstancia().obtenerSucursales();
-		SucursalEntity suc;
-	%>
+		//List<SucursalEntity> lista = AdministradorSucursales.getInstancia().obtenerSucursales();
+		//SucursalEntity suc;
+		String cadena = AdministradorSucursales.getInstancia().obtenerCadena();	%>
 	
 	
 	<br>
@@ -43,12 +43,14 @@
 						<label>Sucursal</label>
 					</td>
 					<td>
-						<SELECT id="idSucursal" name="Sucursal">
-						<% for(Iterator<SucursalEntity> i = lista.iterator(); i.hasNext();){
-							suc = (SucursalEntity)i.next();%>
-							<OPTION VALUE=<%= suc.getIdSucursal() %>><%= suc.getNombre() %></OPTION>
-							<% } %>
-						</SELECT>
+					<p><%= cadena %></p>
+						<!-- <SELECT id="idSucursal" name="Sucursal">
+						 // if(lista!= null) 
+							//for(Iterator<SucursalEntity> i = lista.iterator(); i.hasNext();){
+							//suc = (SucursalEntity)i.next();%>
+							<OPTION VALUE=></OPTION> 
+						
+						</SELECT>-->
 					</td>
 				</tr>
 				<tr>
