@@ -1,69 +1,86 @@
 <!DOCTYPE html>
+<%@page import="entities.SucursalEntity"%>
+<%@page import="modelo.AdministradorSucursales"%>
+<%@page import="servlets.Controlador"%>
+<%@page import="java.util.*"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Restaurante - Mesa</title>
 <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+<script type="text/javascript">
 
+</script>
 </head>
 <body>
 	<h1 id="MainTitle">Abrir Mesa</h1>
 	<!-- Menu -->
 	<ul id="menu">
-		<li><a href="Home.html">Inicio</a></li>
+		<li><a href="Controlador?action=home">Inicio</a></li>
 		<li><a class="selected">Mesa</a>
 			<ul>
-				<li><a href="AbrirMesa.html">Abrir Mesa</a></li>
-				<li><a href="CerrarMesa.html">Cerrar Mesa</a></li>
-				<li><a href="CrearMesa.html">Crear Mesa</a></li>
+				<li><a href="Controlador?action=abrirMesa">Abrir Mesa</a></li>
+				<li><a href="Controlador?action=cerrarMesa">Cerrar Mesa</a></li>
+				<li><a href="Controlador?action=crearMesa">Crear Mesa</a></li>
 			</ul></li>
-		<li><a href="GenerarComanda.html">Generar Comanda</a></li>
-		<li><a href="#">Salir</a></li>
+		<li><a href="Controlador?action=generarComanda">Generar Comanda</a></li>
+		<li><a href="Controlador?action=salir">Salir</a></li>
 	</ul>
 	<!-- Fin Menu -->
+	<%
+		List<SucursalEntity> lista = AdministradorSucursales.getInstancia().obtenerSucursales();
+		SucursalEntity suc;
+	%>
+	
+	
 	<br>
 	<div class="content">
-		<form action="Controlador?action=abrirMesa" method="post">
-			<div style="float: left;">
-				<p>
-					<label>Sucursal</label>
-				</p>
-				<p>
-					<label>Mesas</label>
-				</p>
-				<p>
-					<label>Mozo</label>
-				</p>
-				<p>
-					<label>Personas</label>
-				</p>
-			</div>
-			<div style="float: left">
-				<p>
-					<SELECT name="Sucursal">
-						<OPTION VALUE="Belgrano">Belgrano</OPTION>
-						<OPTION VALUE="Caballito">Caballito</OPTION>
-						<OPTION VALUE="Puerto Madero">Puerto Madero</OPTION>
-					</SELECT>
-				</p>
-				<p>
-					<SELECT name="mesa">
-						<OPTION VALUE="1">1</OPTION>
-						<OPTION VALUE="2">2</OPTION>
-						<OPTION VALUE="3">3</OPTION>
-					</SELECT>
-				</p>
-				<p>
-					<SELECT name="mozo">
-						<OPTION VALUE="Jose">Jose</OPTION>
-						<OPTION VALUE="Juan">Juan</OPTION>
-						<OPTION VALUE="Carlos">Carlos</OPTION>
-					</SELECT>
-				</p>
-				<p>
-					<input type="text" />
-				</p>
-			</div>
+		<form action="Controlador?action=abrirMesaServer" method="post">
+			<table>
+				<tr>
+					<td>		
+						<label>Sucursal</label>
+					</td>
+					<td>
+						<SELECT id="idSucursal" name="Sucursal">
+						<% for(Iterator<SucursalEntity> i = lista.iterator(); i.hasNext();){
+							suc = (SucursalEntity)i.next();%>
+							<OPTION VALUE=<%= suc.getIdSucursal() %>><%= suc.getNombre() %></OPTION>
+							<% } %>
+						</SELECT>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Mesas</label>
+					</td>
+					<td>
+						<span> nros (separados por coma): </span>
+						<input id="nrosMesa" type="text" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Mozo</label>
+					</td>
+					<td>
+						<SELECT id="idMoso" name="mozo">
+							<OPTION VALUE="Jose">Jose</OPTION>
+							<OPTION VALUE="Juan">Juan</OPTION>
+							<OPTION VALUE="Carlos">Carlos</OPTION>
+						</SELECT>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Cantidad Comenzales</label>
+					</td>
+					<td>
+						<input id="cantComenzales" type="text" />
+					</td>
+				</tr>
+			</table>
 			<div style="clear: both;"></div>
 			<input type="submit" value="Abrir" />
 		</form>

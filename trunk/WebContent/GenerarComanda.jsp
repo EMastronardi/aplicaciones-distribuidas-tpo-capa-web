@@ -7,20 +7,19 @@
 </head>
 <body>
 <h1 id="MainTitle">Generar Comanda</h1>
-<!-- Menu -->
-<ul id="menu">
-	<li><a href="Home.html">Inicio</a></li>
-	<li><a>Mesa</a>
-		<ul>
-			<li><a href="AbrirMesa.html">Abrir Mesa</a></li>
-			<li><a href="CerrarMesa.html">Cerrar Mesa</a></li>
-			<li><a href="CrearMesa.html">Crear Mesa</a></li>
+	<!-- Menu -->
+	<ul id="menu">
+		<li><a href="Controlador?action=home">Inicio</a></li>
+		<li><a class="selected">Mesa</a>
+			<ul>
+				<li><a href="Controlador?action=abrirMesa">Abrir Mesa</a></li>
+				<li><a href="Controlador?action=cerrarMesa">Cerrar Mesa</a></li>
+				<li><a href="Controlador?action=crearMesa">Crear Mesa</a></li>
+			</ul></li>
+		<li><a href="Controlador?action=generarComanda">Generar Comanda</a></li>
+		<li><a href="Controlador?action=salir">Salir</a></li>
 	</ul>
-</li>
-<li><a  class="selected" href="GenerarComanda.html">Generar Comanda</a></li>
-<li><a href="#">Salir</a></li>
-</ul>
-<!-- Fin Menu -->
+	<!-- Fin Menu -->
 <!-- Body -->
 </body>
 </html>
