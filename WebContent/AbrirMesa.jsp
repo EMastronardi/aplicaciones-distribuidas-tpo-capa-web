@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page import="entities.SucursalEntity"%>
+<%@page import="beans.SucursalVO"%>
 <%@page import="modelo.AdministradorSucursales"%>
 <%@page import="servlets.Controlador"%>
 <%@page import="java.util.*"%>
@@ -31,7 +31,7 @@
 	<%
 		//List<SucursalEntity> lista = AdministradorSucursales.getInstancia().obtenerSucursales();
 		//SucursalEntity suc;
-		String cadena = AdministradorSucursales.getInstancia().obtenerCadena();	%>
+		//String cadena = AdministradorSucursales.getInstancia().obtenerCadena();	%>
 	
 	
 	<br>
@@ -43,14 +43,18 @@
 						<label>Sucursal</label>
 					</td>
 					<td>
-					<p><%= cadena %></p>
-						<!-- <SELECT id="idSucursal" name="Sucursal">
-						 // if(lista!= null) 
-							//for(Iterator<SucursalEntity> i = lista.iterator(); i.hasNext();){
-							//suc = (SucursalEntity)i.next();%>
-							<OPTION VALUE=></OPTION> 
+					
+						 <SELECT id="idSucursal" name="Sucursal">
+					<% List<SucursalVO> lista = AdministradorSucursales.getInstancia().obtenerSucursales(); 
+						SucursalVO suc;
+						  if(lista!= null) 
+							for(Iterator<SucursalVO> i = lista.iterator(); i.hasNext();){
+							suc = (SucursalVO)i.next(); %>
+							<OPTION VALUE= <%= suc.getIdSucursal() %>><%= suc.getNombre() %></OPTION> 
+							
+							<% } %>
 						
-						</SELECT>-->
+						</SELECT> 
 					</td>
 				</tr>
 				<tr>

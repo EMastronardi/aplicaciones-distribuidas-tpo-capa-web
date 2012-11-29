@@ -10,8 +10,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.SucursalEntity;
-
 import beans.SucursalVO;
 
 public class AdministradorSucursales {
@@ -28,16 +26,14 @@ public class AdministradorSucursales {
 
 	public String obtenerCadena() throws RemoteException, MalformedURLException, NotBoundException {
 
-		System.setProperty("java.security.policy", "java.policy");
+		
 		boolean ok = false;
 		try {
-			System.setSecurityManager(new RMISecurityManager());
-			InterfazRemota test = (InterfazRemota) Naming.lookup("//localhost/Server");
+			//System.setProperty("java.security.policy", "java.policy");
+			   
+			InterfazRemota test = (InterfazRemota) Naming.lookup("//localhost:1099/Server");
 			System.out.println("Conectado con servicio remoto.");
 			ok = true;
-
-		
-		
 		
 		return "OK";
 		
@@ -49,25 +45,16 @@ public class AdministradorSucursales {
 		return "no ok";
 
 	}
-
-	public List<SucursalEntity> obtenerSucursales() throws RemoteException,
-			MalformedURLException, NotBoundException {
+	
+	public List<SucursalVO> obtenerSucursales() throws RemoteException,MalformedURLException, NotBoundException {
 		InterfazRemota lookup;
-		if (System.getSecurityManager() == null)
-			System.setSecurityManager(new RMISecurityManager());
+		
 		try {
-			lookup = (InterfazRemota) Naming.lookup("//localhost:2005/Server");
+			lookup = (InterfazRemota) Naming.lookup("//localhost:1099/Server");
 			List<SucursalVO> lista = lookup.getSucursales();
 
-			List<SucursalEntity> listaEntityes = new ArrayList<SucursalEntity>();
-			for (SucursalVO s : lista) {
-				SucursalEntity se = new SucursalEntity();
-				se.setIdSucursal(s.getIdSucursal());
-				se.setNombre(s.getNombre());
-				listaEntityes.add(se);
-			}
-
-			return listaEntityes;
+		
+			return lista;
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
