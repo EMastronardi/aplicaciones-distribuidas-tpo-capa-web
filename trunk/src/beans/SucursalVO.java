@@ -1,6 +1,13 @@
-package entities;
+package beans;
 
-public class SucursalEntity {
+import java.io.Serializable;
+
+public class SucursalVO implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6295524971234302957L;
 	private int idSucursal;
 	private String nombre;
 
@@ -19,8 +26,12 @@ public class SucursalEntity {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public SucursalEntity() {
+	@Override
+	public String toString() {
+		
+		return "Id: " + this.idSucursal+" - Nombre: " + this.nombre;
+	}
+	public SucursalVO() {
 
 	}
 }
