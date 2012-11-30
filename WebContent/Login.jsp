@@ -12,11 +12,12 @@ if(request.getParameter("usuario") != null){
 	cadena = "Usuario invalido!!!";
 	} 
 %>
-<h1>Login</h1>
+<h1 style="color: #9FCF21; font-family: Verdana, Arial, Sans-Serif">Login</h1>
+	<div class="content">
+
 	<form action="Controlador?action=validarLogin" method="post">
 		<table >
 			<tr>
-
 				<td><span style="line-height: normal; font-family: Verdana, Arial, Sans-Serif; font-weight: bold">Usuario</span></td>
 				<td><input type="text" name="usuario"
 					style="cursor: text; height: auto; width: 138px; font-weight: normal"></td>
@@ -27,8 +28,10 @@ if(request.getParameter("usuario") != null){
 			</tr>
 			<tr>
 		</table>
-		<input type="submit" value="Aceptar" style="width: 289px; font-style: normal; font-family: Verdana, Arial, Sans-Serif"></td>
+		<input type="submit" value="Aceptar" style="width: 289px; font-style: normal; font-family: Verdana, Arial, Sans-Serif">
 		<span><%= cadena %></span>
+		
 	</form>
+	</div>
 </body>
 </html>
