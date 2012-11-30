@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.AdministradorSucursales;
+
 public class Controlador extends HttpServlet {
 
 	private static final long serialVersionUID = 1087702007634924546L;
@@ -21,13 +23,13 @@ public class Controlador extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		String action = request.getParameter("action");
-		String jspPage = "/Default.jsp";
+		String jspPage = "/Login.jsp";
 		
 		if((action == null) || action.length() < 1){
 			action="default";
 		}
 		if("default".equals(action)){
-			jspPage = "/Default.jsp";
+			jspPage = "/Login.jsp";
 		} else if ("abrirMesa".equals(action))
         {
 			jspPage = "/AbrirMesa.jsp";
@@ -44,6 +46,17 @@ public class Controlador extends HttpServlet {
 				e.printStackTrace();
 			}
         	jspPage = "/Default.jsp";
+        } else if("validarLogin".equals(action)){
+        	String usuario = request.getParameter("usuario");
+        	String password = request.getParameter("contraseña");
+        	if(AdministradorSucursales.getInstancia().validarUsuario(usuario, password)){
+        		jspPage = "/Default.jsp";
+        	}else{
+        		jspPage="/Login.jsp";
+        		response.addHeader("usuario", "invalido");
+        	}
+        } else if("salir".equals(action)){
+        	jspPage="/Login.jsp";
         }
 		
 		

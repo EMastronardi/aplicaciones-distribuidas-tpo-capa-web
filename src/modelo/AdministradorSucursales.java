@@ -14,6 +14,17 @@ import beans.SucursalVO;
 
 public class AdministradorSucursales {
 	private static AdministradorSucursales instancia;
+	private InterfazRemota lookup;
+
+	private void ConectarRMI() {
+		try {
+			this.lookup = (InterfazRemota) Naming
+					.lookup("//localhost:1099/Server");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static AdministradorSucursales getInstancia() {
 		if (instancia == null)
@@ -24,19 +35,20 @@ public class AdministradorSucursales {
 	private AdministradorSucursales() {
 	}
 
-	public String obtenerCadena() throws RemoteException, MalformedURLException, NotBoundException {
+	public String obtenerCadena() throws RemoteException,
+			MalformedURLException, NotBoundException {
 
-		
 		boolean ok = false;
 		try {
-			//System.setProperty("java.security.policy", "java.policy");
-			   
-			InterfazRemota test = (InterfazRemota) Naming.lookup("//localhost:1099/Server");
+			// System.setProperty("java.security.policy", "java.policy");
+
+			InterfazRemota test = (InterfazRemota) Naming
+					.lookup("//localhost:1099/Server");
 			System.out.println("Conectado con servicio remoto.");
 			ok = true;
-		
-		return "OK";
-		
+
+			return "OK";
+
 		} catch (Exception e) {
 			System.out.println("No se pudo conectar con servicio remoto."
 					+ "\n" + e.getMessage());
@@ -45,20 +57,18 @@ public class AdministradorSucursales {
 		return "no ok";
 
 	}
-	
+	public boolean validarUsuario(String usuario, String contraseña) throws RemoteException{
+		boolean valido = false;
+		this.ConectarRMI();
+		valido = lookup.validarUsuario(usuario, usuario);
+		return valido;
+	}
 	public List<SucursalVO> obtenerSucursales() throws RemoteException,MalformedURLException, NotBoundException {
-		InterfazRemota lookup;
-		
-		try {
-			lookup = (InterfazRemota) Naming.lookup("//localhost:1099/Server");
-			List<SucursalVO> lista = lookup.getSucursales();
 
-		
-			return lista;
-		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		this.ConectarRMI();
+		List<SucursalVO> lista = lookup.getSucursales();
+
+		return lista;
+
 	}
 }
