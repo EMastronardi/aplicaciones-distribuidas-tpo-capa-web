@@ -14,7 +14,7 @@ import beans.SucursalVO;
 
 public class AdministradorRMI {
 	private static AdministradorRMI instancia;
-	private InterfazRemota  lookup;
+	private InterfazRemota lookup;
 
 	private void ConectarRMI() {
 		try {
@@ -57,14 +57,18 @@ public class AdministradorRMI {
 		return "no ok";
 
 	}
-	public boolean validarUsuario(String usuario, String contraseña) throws RemoteException{
+
+	public boolean validarUsuario(String usuario, String contrasenia)
+			throws RemoteException {
 		boolean valido = false;
-		if(lookup == null)
+		if (lookup == null)
 			this.ConectarRMI();
-		valido = lookup.validarUsuario(usuario, usuario);
+		valido = lookup.validarUsuario(usuario, contrasenia);
 		return valido;
 	}
-	public List<SucursalVO> obtenerSucursales() throws RemoteException,MalformedURLException, NotBoundException {
+
+	public List<SucursalVO> obtenerSucursales() throws RemoteException,
+			MalformedURLException, NotBoundException {
 
 		this.ConectarRMI();
 		List<SucursalVO> lista = lookup.getSucursales();
@@ -73,10 +77,10 @@ public class AdministradorRMI {
 	}
 
 	public SucursalVO obtenerSucursal(String usuario) throws RemoteException {
-		if(lookup == null)
+		if (lookup == null)
 			this.ConectarRMI();
 		SucursalVO suc = lookup.getSucursal(usuario);
-		
+
 		return suc;
 	}
 }
