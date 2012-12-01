@@ -12,9 +12,9 @@ import java.util.List;
 
 import beans.SucursalVO;
 
-public class AdministradorSucursales {
-	private static AdministradorSucursales instancia;
-	private InterfazRemota lookup;
+public class AdministradorRMI {
+	private static AdministradorRMI instancia;
+	private InterfazRemota  lookup;
 
 	private void ConectarRMI() {
 		try {
@@ -26,13 +26,13 @@ public class AdministradorSucursales {
 		}
 	}
 
-	public static AdministradorSucursales getInstancia() {
+	public static AdministradorRMI getInstancia() {
 		if (instancia == null)
-			instancia = new AdministradorSucursales();
+			instancia = new AdministradorRMI();
 		return instancia;
 	}
 
-	private AdministradorSucursales() {
+	private AdministradorRMI() {
 	}
 
 	public String obtenerCadena() throws RemoteException,
@@ -59,7 +59,8 @@ public class AdministradorSucursales {
 	}
 	public boolean validarUsuario(String usuario, String contraseña) throws RemoteException{
 		boolean valido = false;
-		this.ConectarRMI();
+		if(lookup == null)
+			this.ConectarRMI();
 		valido = lookup.validarUsuario(usuario, usuario);
 		return valido;
 	}
@@ -67,8 +68,15 @@ public class AdministradorSucursales {
 
 		this.ConectarRMI();
 		List<SucursalVO> lista = lookup.getSucursales();
-
 		return lista;
 
+	}
+
+	public SucursalVO obtenerSucursal(String usuario) throws RemoteException {
+		if(lookup == null)
+			this.ConectarRMI();
+		SucursalVO suc = lookup.getSucursal(usuario);
+		
+		return suc;
 	}
 }
