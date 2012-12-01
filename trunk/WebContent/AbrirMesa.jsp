@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page import="beans.SucursalVO"%>
-<%@page import="modelo.AdministradorSucursales"%>
+<%@page import="modelo.AdministradorRMI"%>
 <%@page import="servlets.Controlador"%>
 <%@page import="java.util.*"%>
 
@@ -15,6 +15,7 @@
 </head>
 <body>
 	<h1 id="MainTitle">Abrir Mesa</h1>
+	<span><%=request.getSession().getAttribute("usuario") + " - " + request.getSession().getAttribute("sucursal")%></span>
 	<!-- Menu -->
 	<ul id="menu">
 		<li><a href="Controlador?action=home">Inicio</a></li>
@@ -30,8 +31,9 @@
 	<!-- Fin Menu -->
 	<%
 		//List<SucursalEntity> lista = AdministradorSucursales.getInstancia().obtenerSucursales();
-		//SucursalEntity suc;
-		//String cadena = AdministradorSucursales.getInstancia().obtenerCadena();	%>
+			//SucursalEntity suc;
+			//String cadena = AdministradorSucursales.getInstancia().obtenerCadena();
+	%>
 	
 	
 	<br>
@@ -39,43 +41,12 @@
 		<form action="Controlador?action=abrirMesaServer" method="post">
 			<table>
 				<tr>
-					<td>		
-						<label>Sucursal</label>
-					</td>
-					<td>
-					
-						 <SELECT id="idSucursal" name="Sucursal">
-					<% List<SucursalVO> lista = AdministradorSucursales.getInstancia().obtenerSucursales(); 
-						SucursalVO suc;
-						  if(lista!= null) 
-							for(Iterator<SucursalVO> i = lista.iterator(); i.hasNext();){
-							suc = (SucursalVO)i.next(); %>
-							<OPTION VALUE= <%= suc.getIdSucursal() %>><%= suc.getNombre() %></OPTION> 
-							
-							<% } %>
-						
-						</SELECT> 
-					</td>
-				</tr>
-				<tr>
 					<td>
 						<label>Mesas</label>
 					</td>
 					<td>
 						<span> nros (separados por coma): </span>
 						<input id="nrosMesa" type="text" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Mozo</label>
-					</td>
-					<td>
-						<SELECT id="idMoso" name="mozo">
-							<OPTION VALUE="Jose">Jose</OPTION>
-							<OPTION VALUE="Juan">Juan</OPTION>
-							<OPTION VALUE="Carlos">Carlos</OPTION>
-						</SELECT>
 					</td>
 				</tr>
 				<tr>

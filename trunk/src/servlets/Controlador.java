@@ -13,8 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import modelo.AdministradorSucursales;
+import beans.SucursalVO;
+
+import modelo.AdministradorRMI;
 
 public class Controlador extends HttpServlet {
 
@@ -49,7 +52,11 @@ public class Controlador extends HttpServlet {
         } else if("validarLogin".equals(action)){
         	String usuario = request.getParameter("usuario");
         	String password = request.getParameter("contraseña");
-        	if(AdministradorSucursales.getInstancia().validarUsuario(usuario, password)){
+        	if(AdministradorRMI.getInstancia().validarUsuario(usuario, password)){
+        		SucursalVO suc = AdministradorRMI.getInstancia().obtenerSucursal(usuario);
+        		HttpSession session = request.getSession();
+        		session.setAttribute("usuario", usuario);
+        		session.setAttribute("sucursal", suc.getNombre());
         		jspPage = "/Default.jsp";
         	}else{
         		jspPage="/Login.jsp";

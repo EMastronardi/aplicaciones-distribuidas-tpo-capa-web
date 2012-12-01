@@ -14,6 +14,7 @@ public interface InterfazRemota extends Remote{
 	public List<SucursalVO> getSucursales() throws RemoteException;
 	
 	public String getCadena() throws RemoteException;
-
 	public boolean validarUsuario(String usuario, String usuario2)throws RemoteException;
+	
+	public SucursalVO getSucursal(String usuario) throws RemoteException;
 }
