@@ -3,6 +3,8 @@ package servlets;
 import interfaz.InterfazRemota;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
@@ -23,16 +25,32 @@ public class Controlador extends HttpServlet {
 
 	private static final long serialVersionUID = 1087702007634924546L;
 	private static Controlador instancia;
-	
+	protected String action = "";
+	protected String jspPage = "";
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		String action = request.getParameter("action");
-		String jspPage = "/Login.jsp";
+		action = request.getParameter("action");
+		jspPage= "";
 		
-		if((action == null) || action.length() < 1){
+//		if(request.getSession().getAttribute("usuario")!=(null) && !request.getSession().getAttribute("usuario").equals("")){
+//			jspPage = "/Default.jsp";
+//			if((action == null) || action.length() < 1){
+//				action="default";
+//			}
+//		}
+//		else{
+//			jspPage = "/Login.jsp";
+//			action="salir";
+//			
+//		}
+		if(action!=null && !action.equals("validarLogin"))
+			validarSession(request);
+		
+		if((action == null) || action.length() < 1 ){
 			action="default";
-		}
+		}	
+		
 		if("default".equals(action)){
-			jspPage = "/Login.jsp";
+			jspPage = "/Default.jsp";
 		} else if ("abrirMesa".equals(action))
         {
 			jspPage = "/AbrirMesa.jsp";
@@ -64,6 +82,20 @@ public class Controlador extends HttpServlet {
         	}
         } else if("salir".equals(action)){
         	jspPage="/Login.jsp";
+        	request.getSession().setAttribute("usuario", null);
+        	request.getSession().setAttribute("sucursal", null);
+        } else if("confirmarAbrirMesa".equals(action)){
+        	if(!request.getParameter("nrosMesa").equals(null) && !request.getParameter("nrosMesa").equals("")){
+        		
+        		if(!request.getParameter("cantComenzales").equals(null) && Integer.parseInt(request.getParameter("cantComenzales"))>0){
+        			String resultadoAbrirMesa = AdministradorRMI.getInstancia().abrirMesa(request.getParameter("sucursal"), request.getParameter("nrosMesa"), request.getParameter("cantComenzales"), (String)request.getSession().getAttribute("usuario"));
+                	request.setAttribute("mensaje", resultadoAbrirMesa);
+        			jspPage = "/Default.jsp";
+            			
+        		}
+        	}
+        	
+        	
         }
 		
 		
@@ -73,7 +105,14 @@ public class Controlador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-	
+	protected void validarSession(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		if(session.getAttribute("usuario")== null || session.getAttribute("usuario").equals("")){
+			jspPage = "/Login.jsp";
+			action = "salir";
+			
+		}
+	}
 	protected void dispatch(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (jsp != null) {
 			/*
