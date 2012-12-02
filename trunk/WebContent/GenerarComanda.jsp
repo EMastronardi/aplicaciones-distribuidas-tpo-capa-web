@@ -29,6 +29,7 @@ function addElement(){
 </script>
 <body>
 <h1 id="MainTitle">Generar Comanda</h1>
+	<span class="user"><%= "Usuario: "+request.getSession().getAttribute("usuario") + " - Sucursal: " + request.getSession().getAttribute("sucursal") %></span>	
 	<!-- Menu -->
 	<ul id="menu">
 		<li><a href="Controlador?action=home">Inicio</a></li>

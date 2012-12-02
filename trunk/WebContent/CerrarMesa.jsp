@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1 id="MainTitle">Cerrar Mesa</h1>
-	<!-- Menu -->
+	<span class="user"><%= "Usuario: "+request.getSession().getAttribute("usuario") + " - Sucursal: " + request.getSession().getAttribute("sucursal") %></span>	<!-- Menu -->
 	<ul id="menu">
 		<li><a href="Controlador?action=home">Inicio</a></li>
 		<li><a class="selected">Mesa</a>
