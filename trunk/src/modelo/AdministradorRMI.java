@@ -5,11 +5,10 @@ import interfaz.InterfazRemota;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
+import beans.PlatoVO;
 import beans.SucursalVO;
 
 public class AdministradorRMI {
@@ -82,5 +81,13 @@ public class AdministradorRMI {
 		SucursalVO suc = lookup.getSucursal(usuario);
 
 		return suc;
+	}
+
+	public List<PlatoVO> obtenerPlatos() throws RemoteException {
+		if (lookup == null)
+			this.ConectarRMI();
+		List<PlatoVO> platos= lookup.getPlatos();
+
+		return platos;
 	}
 }

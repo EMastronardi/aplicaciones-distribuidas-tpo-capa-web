@@ -15,8 +15,18 @@
     <servlet-name>Controlador</servlet-name>
     <servlet-class>servlets.Controlador</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <display-name>ControladorComanda</display-name>
+    <servlet-name>ControladorComanda</servlet-name>
+    <servlet-class>servlets.ControladorComanda</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Controlador</servlet-name>
     <url-pattern>/Controlador</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ControladorComanda</servlet-name>
+    <url-pattern>/ControladorComanda</url-pattern>
   </servlet-mapping>
 </web-app>
