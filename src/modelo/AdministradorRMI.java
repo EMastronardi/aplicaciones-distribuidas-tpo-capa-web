@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import beans.PlatoVO;
@@ -81,6 +82,21 @@ public class AdministradorRMI {
 		SucursalVO suc = lookup.getSucursal(usuario);
 
 		return suc;
+	}
+
+	public String abrirMesa(String nombreSucursal, String nrosMesas, String cantComenzales, String nombreMozo) throws NumberFormatException, RemoteException {
+		if(lookup == null)
+			this.ConectarRMI();
+		List<Integer> listaNros = new ArrayList<Integer>();
+		String[] lista = nrosMesas.split(",");
+		for (String string : lista) {
+			int valor = Integer.parseInt(string);
+			listaNros.add(valor);
+		}
+		if(lookup.abrirMesa(nombreSucursal, listaNros, nombreMozo, Integer.parseInt(cantComenzales))){
+			return "Mesa Abierta";
+		}else
+			return "Error al abrir Mesa";
 	}
 
 	public List<PlatoVO> obtenerPlatos() throws RemoteException {
