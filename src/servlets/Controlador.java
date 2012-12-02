@@ -51,7 +51,7 @@ public class Controlador extends HttpServlet {
         	jspPage = "/Default.jsp";
         } else if("validarLogin".equals(action)){
         	String usuario = request.getParameter("usuario");
-        	String password = request.getParameter("contraseña");
+        	String password = request.getParameter("contrasenia");
         	if(AdministradorRMI.getInstancia().validarUsuario(usuario, password)){
         		SucursalVO suc = AdministradorRMI.getInstancia().obtenerSucursal(usuario);
         		HttpSession session = request.getSession();
@@ -77,8 +77,8 @@ public class Controlador extends HttpServlet {
 	protected void dispatch(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (jsp != null) {
 			/*
-			 * Envía el control al JSP que pasamos como parámetro, y con los
-			 * request / response cargados con los parámetros
+			 * Envï¿½a el control al JSP que pasamos como parï¿½metro, y con los
+			 * request / response cargados con los parï¿½metros
 			 */
 			RequestDispatcher rd = request.getRequestDispatcher(jsp);
 			rd.forward(request, response);

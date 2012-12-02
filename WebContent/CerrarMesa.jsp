@@ -16,7 +16,7 @@
 				<li><a href="Controlador?action=cerrarMesa">Cerrar Mesa</a></li>
 				<li><a href="Controlador?action=crearMesa">Crear Mesa</a></li>
 			</ul></li>
-		<li><a href="Controlador?action=generarComanda">Generar Comanda</a></li>
+		<li><a href="ControladorComanda?action=generarComanda">Generar Comanda</a></li>
 		<li><a href="Controlador?action=salir">Salir</a></li>
 	</ul>
 	<!-- Fin Menu -->
