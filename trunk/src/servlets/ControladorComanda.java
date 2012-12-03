@@ -35,6 +35,8 @@ public class ControladorComanda  extends HttpServlet{
 		} else if ("generarComanda".equals(action)){
 			jspPage = "/GenerarComanda.jsp";
         }else if("confirmarComanda".equals(action)){
+        	
+        	
         	jspPage="/ConfirmarComanda.jsp";
         }
 		dispatch(jspPage, request, response);

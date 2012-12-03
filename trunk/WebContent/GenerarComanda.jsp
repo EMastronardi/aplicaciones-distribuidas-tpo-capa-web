@@ -6,9 +6,11 @@
 <%@page import="servlets.Controlador"%>
 <%@page import="java.util.*"%>
 <%@page import="beans.PlatoVO" %>
+<%@page import="beans.VentaVO" %>
+
 <%  
 	List<PlatoVO> platos = AdministradorRMI.getInstancia().obtenerPlatos((String)request.getSession().getAttribute("sucursal")); 
-	
+	List<VentaVO> ventas = AdministradorRMI.getInstancia().obtenerVentas((String)request.getSession().getAttribute("sucursal"), (String)request.getSession().getAttribute("usuario"));
 %> 			
 <html>
 <head>
@@ -44,17 +46,21 @@ function addElement(){
 	</ul>
 	<!-- Fin Menu -->
 	<hr width="500px" align="left">
+	<form action="ControladorComanda?action=confirmarComanda">
 	<table style="font-size:12px;">
 		<tr>
 			<td height="10"></td>
 		</tr>
 		<tr>
 			<td>
-			<!-- Form -->
 			<table border="0" id="tablaData">
 				<tr>
 					<td>Mesa</td>
-					<td><Select name="mesa"><option>Seleccionar Mesa</option></Select></td>
+					<td><Select name="mesa"><option>Seleccionar Mesa</option>
+					<% for( VentaVO venta : ventas){
+								out.println("<option value='"+venta.getIdVenta()+"'>"+venta.getNroMesa()+"</option>");
+					} %>
+					</Select></td>
 					<td></td>
 					<td></td>		
 				<td></td>	
@@ -76,6 +82,7 @@ function addElement(){
 					<td><input type="button" name="mas" value="+" onclick="addElement()"/></td>			
 				</tr>
 			</table>
+			
 			</td>
 		</tr>
 		<tr>
@@ -92,6 +99,7 @@ function addElement(){
 			<td>
 		<tr>
 	</table>
+	</form>
 	<hr width="500px" align="left"/>
 <!-- Body -->
 </body>

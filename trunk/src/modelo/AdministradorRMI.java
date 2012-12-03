@@ -9,9 +9,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.MesaVO;
 import beans.PlatoVO;
 import beans.SucursalVO;
+import beans.VentaVO;
 
 public class AdministradorRMI {
 	private static AdministradorRMI instancia;
@@ -114,5 +114,11 @@ public class AdministradorRMI {
 		boolean resultado = lookup.cerrarVenta(sucursal, Integer.parseInt(mesa));
 		return null;
 	}
-
+	
+	public List<VentaVO> obtenerVentas(String sucursal, String usuario) throws RemoteException{
+		if (lookup == null)
+			this.ConectarRMI();
+		List<VentaVO> lista = lookup.getVentasAbiertas(sucursal, usuario);
+		return lista;
+	}
 }
