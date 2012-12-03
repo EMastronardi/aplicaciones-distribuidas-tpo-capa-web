@@ -42,12 +42,12 @@ function addElement(){
 				<li><a href="Controlador?action=crearMesa">Crear Mesa</a></li>
 			</ul></li>
 		<li><a href="ControladorComanda?action=generarComanda">Generar Comanda</a></li>
-		<li><a href="ControladorComanda?action=ConfirmarComanda">Confirmar Comanda</a></li>
+		<li><a href="ControladorComanda?action=confirmarComandaRealizada">Confirmar Comanda</a></li>
 		<li><a href="Controlador?action=salir">Salir</a></li>
 	</ul>
 	<!-- Fin Menu -->
 	<hr width="500px" align="left">
-	<form action="ControladorComanda?action=confirmarComanda">
+	<form action="ControladorComanda?action=confirmarComanda" method="post">
 	<table style="font-size:12px;">
 		<tr>
 			<td height="10"></td>

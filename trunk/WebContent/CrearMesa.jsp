@@ -21,7 +21,7 @@
 				<li><a href="CrearMesa.jsp">Crear Mesa</a></li>
 			</ul></li>
 		<li><a href="GenerarComanda.jsp">Generar Comanda</a></li>
-		<li><a href="ControladorComanda?action=ConfirmarComanda">Confirmar Comanda</a></li>
+		<li><a href="ControladorComanda?action=confirmarComandaRealizada">Confirmar Comanda</a></li>
 		<li><a href="Controlador?action=salir">Salir</a></li>
 	</ul>
 	<!-- Fin Menu -->

@@ -39,8 +39,13 @@ public class ControladorComanda  extends HttpServlet{
         	String[] platos = request.getParameterValues("plato");
         	String[] cantidad = request.getParameterValues("cant");
         	Integer mesa = Integer.parseInt(request.getParameter("mesa"));
-        	AdministradorRMI.getInstancia().generarComanda((String)request.getSession().getAttribute("sucursal"), (String)request.getSession().getAttribute("usuario"), mesa, platos, cantidad);
-        	jspPage="/ConfirmarComanda.jsp";
+        	boolean resultado =AdministradorRMI.getInstancia().generarComanda((String)request.getSession().getAttribute("sucursal"), (String)request.getSession().getAttribute("usuario"), mesa, platos, cantidad);
+        	if(resultado)
+        		jspPage="/Default.jsp?mensaje=Comanda generada con exito!";
+        	else
+        		jspPage="/Default.jsp?mensaje=Comanda NO generada, error!";
+        	
+        	//jspPage="/ConfirmarComanda.jsp";
         }else if("confirmarComandaRealizada".equals(action)){
         	
         	String idComanda = request.getParameter("comanda");
