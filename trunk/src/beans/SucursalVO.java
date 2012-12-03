@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class SucursalVO implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6295524971234302957L;
 	private int idSucursal;
 	private String nombre;
