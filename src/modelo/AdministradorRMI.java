@@ -100,10 +100,10 @@ public class AdministradorRMI {
 			return "Error al abrir Mesa";
 	}
 
-	public List<PlatoVO> obtenerPlatos() throws RemoteException {
+	public List<PlatoVO> obtenerPlatos(String sucursal) throws RemoteException {
 		if (lookup == null)
 			this.ConectarRMI();
-		List<PlatoVO> platos= lookup.getPlatos();
+		List<PlatoVO> platos= lookup.getPlatos(sucursal);
 
 		return platos;
 	}

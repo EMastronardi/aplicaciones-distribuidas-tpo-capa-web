@@ -7,6 +7,7 @@ import java.util.List;
 import beans.MesaVO;
 import beans.PlatoVO;
 import beans.SucursalVO;
+import beans.VentaVO;
 
 
 public interface InterfazRemota extends Remote{
@@ -16,7 +17,8 @@ public interface InterfazRemota extends Remote{
 	public String getCadena() throws RemoteException;
 	public boolean validarUsuario(String usuario, String usuario2)throws RemoteException;
 	public SucursalVO getSucursal(String usuario) throws RemoteException;
-	public List<PlatoVO> getPlatos() throws RemoteException;
+	public List<PlatoVO> getPlatos(String sucursal) throws RemoteException;
+	public List<VentaVO> getVentasAbiertas(String sucursal, String nombre)throws RemoteException;
 	
 	
 }

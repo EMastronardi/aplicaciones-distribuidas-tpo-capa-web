@@ -7,7 +7,7 @@
 <%@page import="java.util.*"%>
 <%@page import="beans.PlatoVO" %>
 <%  
-	List<PlatoVO> platos = AdministradorRMI.getInstancia().obtenerPlatos(); 
+	List<PlatoVO> platos = AdministradorRMI.getInstancia().obtenerPlatos((String)request.getSession().getAttribute("sucursal")); 
 	
 %> 			
 <html>
