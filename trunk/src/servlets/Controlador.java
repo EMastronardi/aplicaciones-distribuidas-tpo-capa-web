@@ -31,17 +31,7 @@ public class Controlador extends HttpServlet {
 		action = request.getParameter("action");
 		jspPage= "";
 		
-//		if(request.getSession().getAttribute("usuario")!=(null) && !request.getSession().getAttribute("usuario").equals("")){
-//			jspPage = "/Default.jsp";
-//			if((action == null) || action.length() < 1){
-//				action="default";
-//			}
-//		}
-//		else{
-//			jspPage = "/Login.jsp";
-//			action="salir";
-//			
-//		}
+
 		if(action!=null && !action.equals("validarLogin"))
 			validarSession(request);
 		
@@ -54,19 +44,6 @@ public class Controlador extends HttpServlet {
 		} else if ("abrirMesa".equals(action))
         {
 			jspPage = "/AbrirMesa.jsp";
-        }else if("abrirMesaServer".equals(action)){
-        	List<Integer> listaMesas = new ArrayList<Integer>();
-        	String[] nros= request.getParameter("nrosMesas").split(",");
-        	for (String nro : nros) {
-				listaMesas.add(Integer.parseInt(nro));
-			}
-        	int cantComenzales = Integer.parseInt(request.getParameter("cantComenzales"));
-        	try {
-				this.abrirMesaServer(request.getParameter("nombreSucursal"), listaMesas,request.getParameter("nombreMozo"), cantComenzales);
-			} catch (NotBoundException e) {
-				e.printStackTrace();
-			}
-        	jspPage = "/Default.jsp";
         } else if("validarLogin".equals(action)){
         	String usuario = request.getParameter("usuario");
         	String password = request.getParameter("contrasenia");
@@ -88,16 +65,13 @@ public class Controlador extends HttpServlet {
         	if(!request.getParameter("nrosMesa").equals(null) && !request.getParameter("nrosMesa").equals("")){
         		
         		if(!request.getParameter("cantComenzales").equals(null) && Integer.parseInt(request.getParameter("cantComenzales"))>0){
-        			String resultadoAbrirMesa = AdministradorRMI.getInstancia().abrirMesa(request.getParameter("sucursal"), request.getParameter("nrosMesa"), request.getParameter("cantComenzales"), (String)request.getSession().getAttribute("usuario"));
-                	request.setAttribute("mensaje", resultadoAbrirMesa);
-        			jspPage = "/Default.jsp";
+        			String resultadoAbrirMesa = AdministradorRMI.getInstancia().abrirMesa((String)request.getSession().getAttribute("sucursal"), request.getParameter("nrosMesa"), request.getParameter("cantComenzales"), (String)request.getSession().getAttribute("usuario"));
+                	//request.setAttribute("mensaje", resultadoAbrirMesa);
+        			jspPage = "/Default.jsp?mensaje="+resultadoAbrirMesa;
             			
         		}
         	}
-        	
-        	
         }
-		
 		
 		dispatch(jspPage, request, response);
 	}
@@ -116,17 +90,13 @@ public class Controlador extends HttpServlet {
 	protected void dispatch(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (jsp != null) {
 			/*
-			 * Env�a el control al JSP que pasamos como par�metro, y con los
+			 * Envia el control al JSP que pasamos como par�metro, y con los
 			 * request / response cargados con los par�metros
 			 */
 			RequestDispatcher rd = request.getRequestDispatcher(jsp);
 			rd.forward(request, response);
 		}
 	}
-	protected boolean abrirMesaServer(String nombreSucursal,List<Integer> nrosMesas,String nombreMozo, int cantComenzales) throws NotBoundException, ServletException, IOException{
-		InterfazRemota lookup = (InterfazRemota) Naming.lookup("//localhost/Server");
-		return lookup.abrirMesa(nombreSucursal, nrosMesas, nombreMozo, cantComenzales);
-		
-	}
+	
 
 }
