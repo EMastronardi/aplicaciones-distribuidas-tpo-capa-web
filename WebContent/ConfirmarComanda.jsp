@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<h1 id="MainTitle">Generar Comanda</h1>
+<h1 id="MainTitle">Confirmar Comanda</h1>
 	<span class="user"><%= "Usuario: "+request.getSession().getAttribute("usuario") + " - Sucursal: " + request.getSession().getAttribute("sucursal") %></span>	
 	<!-- Menu -->
 	<ul id="menu">
@@ -31,7 +31,7 @@
 				<li><a href="Controlador?action=crearMesa">Crear Mesa</a></li>
 			</ul></li>
 		<li><a href="ControladorComanda?action=generarComanda">Generar Comanda</a></li>
-		<li><a href="ControladorComanda?action=ConfirmarComanda">Confirmar Comanda</a></li>
+		<li><a href="ControladorComanda?action=confirmarComandaRealizada">Confirmar Comanda</a></li>
 		<li><a href="Controlador?action=salir">Salir</a></li>
 	</ul>
 	<!-- Fin Menu -->
