@@ -2,7 +2,6 @@
 <%@page import="beans.SucursalVO"%>
 <%@page import="modelo.AdministradorRMI"%>
 <%@page import="servlets.Controlador"%>
-<%@page import="java.util.*"%>
 
 <html>
 <head>

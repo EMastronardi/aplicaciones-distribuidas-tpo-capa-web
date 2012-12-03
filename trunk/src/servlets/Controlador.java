@@ -71,6 +71,13 @@ public class Controlador extends HttpServlet {
             			
         		}
         	}
+        }else if("confirmarCerrarMesa".equals(action)){
+        	String mesa = request.getParameter("mesa");
+        	if(!mesa.equals(null) && !mesa.equals("") ){
+        		String resultadoCerrarVenta = AdministradorRMI.getInstancia().cerrarVenta((String)request.getSession().getAttribute("sucursal"),mesa);
+        		jspPage = "/Default.jsp?mensaje="+resultadoCerrarVenta;
+        		
+        	}
         }
 		
 		dispatch(jspPage, request, response);

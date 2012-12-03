@@ -108,4 +108,11 @@ public class AdministradorRMI {
 		return platos;
 	}
 
+	public String cerrarVenta(String sucursal, String mesa) throws NumberFormatException, RemoteException {
+		if (lookup == null)
+			this.ConectarRMI();
+		boolean resultado = lookup.cerrarVenta(sucursal, Integer.parseInt(mesa));
+		return null;
+	}
+
 }
