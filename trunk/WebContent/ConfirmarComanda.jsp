@@ -6,29 +6,18 @@
 <%@page import="servlets.Controlador"%>
 <%@page import="java.util.*"%>
 <%@page import="beans.PlatoVO" %>
-<%@page import="beans.VentaVO" %>
+<%@page import="beans.ComandaVO" %>
 
 <%  
-	List<PlatoVO> platos = AdministradorRMI.getInstancia().obtenerPlatos((String)request.getSession().getAttribute("sucursal")); 
-	List<VentaVO> ventas = AdministradorRMI.getInstancia().obtenerVentas((String)request.getSession().getAttribute("sucursal"), (String)request.getSession().getAttribute("usuario"));
+	List<ComandaVO> comandas = AdministradorRMI.getInstancia().obtenerComandasAbiertas((String)request.getSession().getAttribute("sucursal"));
 %> 			
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Restaurante - Comanda</title>
+<title>Restaurante - Confirmar Comanda</title>
 <link rel="stylesheet" type="text/css" href="styles/styles.css" />
 </head>
-<script>
-var cantElement=0;
-function addElement(){
-	var newTR = document.createElement("tr");
-	newTR.innerHTML = document.getElementById("firstId").innerHTML;	
-	newTR.cells[4].innerHTML="";		
-	var tab = document.getElementById("tablaData");
-	tab.appendChild(newTR);
-}
 
-</script>
 <body>
 <h1 id="MainTitle">Generar Comanda</h1>
 	<span class="user"><%= "Usuario: "+request.getSession().getAttribute("usuario") + " - Sucursal: " + request.getSession().getAttribute("sucursal") %></span>	
@@ -47,7 +36,7 @@ function addElement(){
 	</ul>
 	<!-- Fin Menu -->
 	<hr width="500px" align="left">
-	<form action="ControladorComanda?action=confirmarComanda">
+	<form action="ControladorComanda?action=confirmarComandaRealizada">
 	<table style="font-size:12px;">
 		<tr>
 			<td height="10"></td>
@@ -56,34 +45,14 @@ function addElement(){
 			<td>
 			<table border="0" id="tablaData">
 				<tr>
-					<td>Mesa</td>
-					<td><Select name="mesa"><option>Seleccionar Mesa</option>
-					<% for( VentaVO venta : ventas){
-								out.println("<option value='"+venta.getIdVenta()+"'>"+venta.getNroMesa()+"</option>");
+					<td>Comanda</td>
+					<td><Select name="comanda"><option>Seleccionar Comanda</option>
+					<% for( ComandaVO comanda : comandas){
+								out.println("<option value='"+comanda.getIdComanda()+"'>"+comanda.getIdComanda()+"</option>");
 					} %>
 					</Select></td>
-					<td></td>
-					<td></td>		
-				<td></td>	
-				</tr>
-				<tr id="firstId">	
-					<td>Producto</td>
-					<td>
-						<Select name="producto">
-							<option>Seleccionar Producto</option>
-							<% for( PlatoVO plato : platos){
-								out.println("<option value='"+plato.getIdPlato()+"'>"+plato.getNombre()+"</option>");
-							} %>
-						</Select>
-					</td>
-					<td>Cantidad</td>
-					<td>
-						<select><% for(int i =1; i<=100; i++){%><option value="<%=i%>"><%=i%></option><%}%></select>
-					</td>
-					<td><input type="button" name="mas" value="+" onclick="addElement()"/></td>			
-				</tr>
+					</tr>
 			</table>
-			
 			</td>
 		</tr>
 		<tr>
@@ -97,8 +66,8 @@ function addElement(){
 					<td><input type="reset" name="cancelar" value="Cancelar"></td>
 				</tr>
 				</table>
-			<td>
-		<tr>
+			</td>
+		</tr>
 	</table>
 	</form>
 	<hr width="500px" align="left"/>

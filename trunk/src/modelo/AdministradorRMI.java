@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.ComandaVO;
 import beans.PlatoVO;
 import beans.SucursalVO;
 import beans.VentaVO;
@@ -126,5 +127,19 @@ public class AdministradorRMI {
 			this.ConectarRMI();
 		
 		return lookup.generarComanda(sucursal,nombre, mesa, platos, cantidades);
+	}
+	public List<ComandaVO> obtenerComandasAbiertas(String sucursal) throws RemoteException{
+		
+		if (lookup == null)
+			this.ConectarRMI();
+		return lookup.getComandasAbiertas(sucursal);
+		
+	}
+
+	public boolean confirmarComandaRealizada(String idComanda) throws RemoteException {
+		if (lookup == null)
+			this.ConectarRMI();
+		return lookup.confirmarComandaRealizada(idComanda);
+		
 	}
 }
