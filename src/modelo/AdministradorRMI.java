@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.MesaVO;
 import beans.PlatoVO;
 import beans.SucursalVO;
 
@@ -106,4 +107,5 @@ public class AdministradorRMI {
 
 		return platos;
 	}
+
 }
