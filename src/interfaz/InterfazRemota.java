@@ -20,6 +20,5 @@ public interface InterfazRemota extends Remote{
 	public List<PlatoVO> getPlatos(String sucursal) throws RemoteException;
 	public List<VentaVO> getVentasAbiertas(String sucursal, String nombre)throws RemoteException;
 	public boolean cerrarVenta(String sucursal, int nroMesa)throws RemoteException;
-	
-	
+	public boolean generarComanda(String sucursal, String nombre, Integer mesa, String[] platos, String[] cantidad)throws RemoteException;
 }

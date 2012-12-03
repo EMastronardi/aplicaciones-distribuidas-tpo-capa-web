@@ -121,4 +121,10 @@ public class AdministradorRMI {
 		List<VentaVO> lista = lookup.getVentasAbiertas(sucursal, usuario);
 		return lista;
 	}
+	public boolean generarComanda(String sucursal, String nombre, Integer mesa, String[] platos, String[] cantidades) throws RemoteException{
+		if (lookup == null)
+			this.ConectarRMI();
+		
+		return lookup.generarComanda(sucursal,nombre, mesa, platos, cantidades);
+	}
 }
