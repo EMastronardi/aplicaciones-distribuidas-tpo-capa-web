@@ -36,7 +36,10 @@ public class ControladorComanda  extends HttpServlet{
 			jspPage = "/GenerarComanda.jsp";
         }else if("confirmarComanda".equals(action)){
         	
-        	
+        	String[] platos = request.getParameterValues("plato");
+        	String[] cantidad = request.getParameterValues("cant");
+        	Integer mesa = Integer.parseInt(request.getParameter("mesa"));
+        	AdministradorRMI.getInstancia().generarComanda((String)request.getSession().getAttribute("sucursal"), (String)request.getSession().getAttribute("usuario"), mesa, platos, cantidad);
         	jspPage="/ConfirmarComanda.jsp";
         }
 		dispatch(jspPage, request, response);
