@@ -37,7 +37,7 @@ public class ControladorComanda  extends HttpServlet{
         }else if("confirmarComanda".equals(action)){
         	
         	String[] platos = request.getParameterValues("plato");
-        	String[] cantidad = request.getParameterValues("cant");
+        	String[] cantidad = request.getParameterValues("cantidad");
         	Integer mesa = Integer.parseInt(request.getParameter("mesa"));
         	boolean resultado =AdministradorRMI.getInstancia().generarComanda((String)request.getSession().getAttribute("sucursal"), (String)request.getSession().getAttribute("usuario"), mesa, platos, cantidad);
         	if(resultado)
@@ -48,14 +48,18 @@ public class ControladorComanda  extends HttpServlet{
         	//jspPage="/ConfirmarComanda.jsp";
         }else if("confirmarComandaRealizada".equals(action)){
         	
+        	jspPage = "/ConfirmarComanda.jsp";
+        	
+      	
+        		
+        }else if("confirmarComandaRealizada2".equals(action)){
+        	
         	String idComanda = request.getParameter("comanda");
         	boolean resultado =AdministradorRMI.getInstancia().confirmarComandaRealizada(idComanda);
         	if(resultado)
         		jspPage="/Default.jsp?mensaje=Comanda confirmada con exito!";
         	else
         		jspPage="/Default.jsp?mensaje=Comanda NO confirmada, error!";
-        	
-        		
         }
 		dispatch(jspPage, request, response);
 	}
