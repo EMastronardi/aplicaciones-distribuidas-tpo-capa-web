@@ -128,11 +128,11 @@ public class AdministradorRMI {
 		
 		return lookup.generarComanda(sucursal,nombre, mesa, platos, cantidades);
 	}
-	public List<ComandaVO> obtenerComandasAbiertas(String sucursal) throws RemoteException{
+	public List<ComandaVO> obtenerComandasAbiertas(String sucursal, String nombre) throws RemoteException{
 		
 		if (lookup == null)
 			this.ConectarRMI();
-		return lookup.getComandasAbiertas(sucursal);
+		return lookup.getComandasAbiertas(sucursal, nombre);
 		
 	}
 

@@ -59,7 +59,7 @@ function addElement(){
 					<td>Mesa</td>
 					<td><Select name="mesa"><option>Seleccionar Mesa</option>
 					<% for( VentaVO venta : ventas){
-								out.println("<option value='"+venta.getIdVenta()+"'>"+venta.getNroMesa()+"</option>");
+								out.println("<option value='"+venta.getNroMesa()+"'>"+venta.getNroMesa()+"</option>");
 					} %>
 					</Select></td>
 					<td></td>
@@ -69,7 +69,7 @@ function addElement(){
 				<tr id="firstId">	
 					<td>Producto</td>
 					<td>
-						<Select name="producto">
+						<Select name="plato">
 							<option>Seleccionar Producto</option>
 							<% for( PlatoVO plato : platos){
 								out.println("<option value='"+plato.getIdPlato()+"'>"+plato.getNombre()+"</option>");
@@ -78,7 +78,7 @@ function addElement(){
 					</td>
 					<td>Cantidad</td>
 					<td>
-						<select><% for(int i =1; i<=100; i++){%><option value="<%=i%>"><%=i%></option><%}%></select>
+						<select name="cantidad"><% for(int i =1; i<=100; i++){%><option value="<%=i%>"><%=i%></option><%}%></select>
 					</td>
 					<td><input type="button" name="mas" value="+" onclick="addElement()"/></td>			
 				</tr>

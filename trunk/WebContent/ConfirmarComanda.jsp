@@ -9,7 +9,7 @@
 <%@page import="beans.ComandaVO" %>
 
 <%  
-	List<ComandaVO> comandas = AdministradorRMI.getInstancia().obtenerComandasAbiertas((String)request.getSession().getAttribute("sucursal"));
+	List<ComandaVO> comandas = AdministradorRMI.getInstancia().obtenerComandasAbiertas((String)request.getSession().getAttribute("sucursal"),(String)request.getSession().getAttribute("usuario"));
 %> 			
 <html>
 <head>
@@ -36,7 +36,7 @@
 	</ul>
 	<!-- Fin Menu -->
 	<hr width="500px" align="left">
-	<form action="ControladorComanda?action=confirmarComandaRealizada">
+	<form action="ControladorComanda?action=confirmarComandaRealizada2" method="post">
 	<table style="font-size:12px;">
 		<tr>
 			<td height="10"></td>
@@ -49,7 +49,7 @@
 					<td><Select name="comanda"><option>Seleccionar Comanda</option>
 					<% for( ComandaVO comanda : comandas){
 								out.println("<option value='"+comanda.getIdComanda()+"'>"+comanda.getIdComanda()+"</option>");
-					} %>
+					}%>
 					</Select></td>
 					</tr>
 			</table>
